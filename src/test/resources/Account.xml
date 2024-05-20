@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<table name="public.account">
+		<column>account_id</column>
+		<column>account_name</column>
+		<column>post_code</column>
+		<column>address</column>
+		<column>telephone_number</column>
+		<column>update_data</column>
+		<column>delete_data</column>
+		<column>delete_flag</column>
+		<row>
+			<value>1</value>
+			<value>小林雄磨</value>
+			<value>3380014</value>
+			<value>埼玉県</value>
+			<value>080</value>
+			<value>2024/05/18</value>
+			<value>null</value>
+			<value>false</value>
+		</row>
+		<!-- 他のユーザーのデータも追加 -->
+	</table>
+</dataset>
