@@ -47,7 +47,7 @@ public class Account {
 	private Date updateData;
 
 	// 削除日時
-	@Column(name = "delete_data")
+	@Column(name = "delete_data", nullable = true)
 	private Date deleteData;
 
 	// 削除フラグ
