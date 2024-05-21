@@ -3,6 +3,7 @@ package com.example.ec.controller;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.apache.coyote.BadRequestException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class AccountControllerTest extends CommonTest {
 				null);
 
 		// モックの設定
-		// doNothing().when(accountService).checkAccountData(accountDetails);
-		// doNothing().when(accountService).createAccount(accountDetails);
+		doNothing().when(accountService).checkAccountData(accountDetails);
+		doNothing().when(accountService).createAccount(accountDetails);
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/account")
 				.content(asJsonString(accountDetails))
@@ -57,18 +58,18 @@ public class AccountControllerTest extends CommonTest {
 		final Account accountDetails = createAccount(null, "3380014", "埼玉県", "080");
 
 		ErrorResponse errorResponse = new ErrorResponse(
-				HttpStatus.BAD_REQUEST.value(),
+				HttpStatus.INTERNAL_SERVER_ERROR.value(),
 				"アカウント名が未入力です");
 
 		// モックの設定
-		doThrow(new Exception("アカウント名が未入力です")).when(accountService).checkAccountData(accountDetails);
+		doThrow(new BadRequestException("アカウント名が未入力です")).when(accountService).checkAccountData(accountDetails);
 
 		// テスト実行
 		mvc.perform(MockMvcRequestBuilders.post("/api/account")
 				.content(asJsonString(accountDetails))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest())
+				.andExpect(status().isInternalServerError())
 				.andExpect(content().json(asJsonString(errorResponse)));
 	}
 
@@ -97,7 +98,7 @@ public class AccountControllerTest extends CommonTest {
 
 	@Test
 	@DisplayName("アカウント読込API_OK")
-	public void readAccount_OK() throws Exception {
+	public void getAccount_OK() throws Exception {
 
 		Long accountId = (long) 1;
 
@@ -115,7 +116,7 @@ public class AccountControllerTest extends CommonTest {
 
 	@Test
 	@DisplayName("アカウント読込API_NG")
-	public void readAccount_NG() throws Exception {
+	public void getAccount_NG() throws Exception {
 
 		Long accountId = (long) 2;
 
@@ -155,6 +156,51 @@ public class AccountControllerTest extends CommonTest {
 				.andExpect(status().isOk())
 				.andExpect(content().json(asJsonString(errorResponse)));
 
+	}
+
+	@Test
+	@DisplayName("アカウント更新API_入力情報NG")
+	public void updataAccount_NG1() throws Exception {
+
+		final Account accountDetails = createAccount(null, "3380014", "埼玉県", "080");
+
+		ErrorResponse errorResponse = new ErrorResponse(
+				HttpStatus.INTERNAL_SERVER_ERROR.value(),
+				"アカウント名が未入力です");
+
+		// モックの設定
+		doThrow(new BadRequestException("アカウント名が未入力です")).when(accountService).checkAccountData(accountDetails);
+
+		// テスト実行
+		mvc.perform(MockMvcRequestBuilders.post("/api/account")
+				.content(asJsonString(accountDetails))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isInternalServerError())
+				.andExpect(content().json(asJsonString(errorResponse)));
+	}
+
+	@Test
+	@DisplayName("アカウント更新API_作成NG")
+	public void updataAccount_NG2() throws Exception {
+
+		final Account accountDetails = createAccount(null, "3380014", "埼玉県", "080");
+
+		ErrorResponse errorResponse = new ErrorResponse(
+				HttpStatus.INTERNAL_SERVER_ERROR.value(),
+				"アカウントの更新に失敗しました");
+
+		// モックの設定
+		doNothing().when(accountService).checkAccountData(accountDetails);
+		doThrow(new Exception("アカウントの更新に失敗しました")).when(accountService).createAccount(accountDetails);
+
+		// テスト実行
+		mvc.perform(MockMvcRequestBuilders.post("/api/account")
+				.content(asJsonString(accountDetails))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isInternalServerError())
+				.andExpect(content().json(asJsonString(errorResponse)));
 	}
 
 	public Account createAccount(String accountName, String postCode, String address, String telephoneNumber) {

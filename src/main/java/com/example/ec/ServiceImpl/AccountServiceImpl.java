@@ -91,7 +91,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @throws Exception エラーレスポンス
 	 */
 	@Override
-	public void checkAccountData(Account accountDetails) throws Exception {
+	public void checkAccountData(Account accountDetails) throws BadRequestException {
 		// アカウント情報チェック処理
 		String accountErrorMessage = accountDetails.checkAccountData();
 		// エラーメッセージが存在する場合

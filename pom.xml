@@ -61,6 +61,12 @@
 			<version>2.7.3</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.32</version> <!-- 最新バージョンを確認して使用してください -->
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

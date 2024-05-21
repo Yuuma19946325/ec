@@ -1,5 +1,6 @@
 package com.example.ec.service;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import com.example.ec.model.Account;
@@ -17,5 +18,5 @@ public interface AccountService {
 	public void updateAccount(Long accountId, Account accountDetails) throws Exception;
 
 	// アカウント情報チェック処理
-	public void checkAccountData(Account accountDetails) throws Exception;
+	public void checkAccountData(Account accountDetails) throws BadRequestException;
 }
