@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ec.Handler.BadRequestException;
-import com.example.ec.model.Account;
+import com.example.ec.entity.Account;
 import com.example.ec.repository.AccountRepository;
 import com.example.ec.service.AccountService;
 

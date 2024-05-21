@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<table name="public.account">
-		<column>account_id</column>
-		<column>account_name</column>
-		<column>post_code</column>
-		<column>address</column>
-		<column>telephone_number</column>
-		<column>update_data</column>
-		<column>delete_data</column>
-		<column>delete_flag</column>
-		<row>
-			<value>1</value>
-			<value>小林雄磨</value>
-			<value>3380014</value>
-			<value>埼玉県</value>
-			<value>080</value>
-			<value>2024/05/18</value>
-			<value>null</value>
-			<value>false</value>
-		</row>
-		<!-- 他のユーザーのデータも追加 -->
-	</table>
+	<account account_id="1" account_name="小林雄磨" post_code="3380014"
+		address="埼玉県" telephone_number="080" update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458" delete_flag="false" />
+	<account account_id="2" account_name="小林雄磨2"
+		post_code="3380014" address="埼玉県" telephone_number="080"
+		update_data="2024-05-21 21:09:42.458" delete_data="2024-05-21 21:09:42.458" delete_flag="false" />
 </dataset>

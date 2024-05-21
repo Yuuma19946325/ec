@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ec.Handler.ErrorResponse;
-import com.example.ec.model.Account;
+import com.example.ec.entity.Account;
 import com.example.ec.service.AccountService;
 
 /**

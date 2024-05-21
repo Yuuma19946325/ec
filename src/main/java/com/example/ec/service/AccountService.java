@@ -3,7 +3,7 @@ package com.example.ec.service;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
-import com.example.ec.model.Account;
+import com.example.ec.entity.Account;
 
 @Service
 public interface AccountService {

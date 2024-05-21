@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.ec.CommonTest;
 import com.example.ec.Handler.ErrorResponse;
-import com.example.ec.model.Account;
+import com.example.ec.entity.Account;
 import com.example.ec.service.AccountService;
 
 @WebMvcTest(AccountController.class)
