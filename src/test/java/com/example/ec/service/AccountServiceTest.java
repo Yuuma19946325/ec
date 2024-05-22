@@ -48,7 +48,7 @@ public class AccountServiceTest {
 	 * @throws Exception
 	 */
 	@BeforeEach
-	void setUp() throws Exception {
+	void beforeEach() throws Exception {
 		// 元のリポジトリを保存
 		accountRepository = (AccountRepository) ReflectionTestUtils.getField(accountService, "accountRepository");
 
@@ -68,7 +68,7 @@ public class AccountServiceTest {
 	 * @throws Exception
 	 */
 	@AfterEach
-	public void down() throws Exception {
+	public void afterEach() throws Exception {
 		// 元のリポジトリを戻す
 		ReflectionTestUtils.setField(accountService, "accountRepository", accountRepository);
 
