@@ -44,6 +44,7 @@ public class AccountControllerTest extends CommonTest {
 		doNothing().when(accountService).checkAccountData(accountDetails);
 		doNothing().when(accountService).createAccount(accountDetails);
 
+		// テスト実行
 		mvc.perform(MockMvcRequestBuilders.post("/api/account")
 				.content(asJsonString(accountDetails))
 				.contentType(MediaType.APPLICATION_JSON)
@@ -206,6 +207,7 @@ public class AccountControllerTest extends CommonTest {
 		doNothing().when(accountService).checkAccountData(accountDetails);
 		doNothing().when(accountService).updateAccount(accountId, accountDetails);
 
+		// テスト実行
 		mvc.perform(MockMvcRequestBuilders.put("/api/account/" + accountId)
 				.content(asJsonString(accountDetails))
 				.contentType(MediaType.APPLICATION_JSON)

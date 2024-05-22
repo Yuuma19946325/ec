@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 		try {
 			// DB→アカウント作成
 			accountRepository.save(accountDetails);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new SQLException("アカウントの作成に失敗しました");
 		}
 
@@ -51,7 +51,7 @@ public class AccountServiceImpl implements AccountService {
 		try {
 			// DB→アカウント情報取得
 			account = accountRepository.findById(accountId).get();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new SQLException("アカウントの取得に失敗しました");
 		}
 
@@ -76,11 +76,13 @@ public class AccountServiceImpl implements AccountService {
 			account.setPostCode(accountDetails.getPostCode());
 			account.setAddress(accountDetails.getAddress());
 			account.setTelephoneNumber(accountDetails.getTelephoneNumber());
+			account.setMailAddress(accountDetails.getMailAddress());
+			account.setPassword(accountDetails.getPassword());
 			account.setUpdateDataNow();
 
 			// DB→アカウント更新
 			accountRepository.save(account);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new SQLException("アカウントの更新に失敗しました");
 		}
 
