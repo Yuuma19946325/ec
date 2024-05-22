@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<account account_id="1" account_name="小林雄磨" post_code="3380014"
-		address="埼玉県" telephone_number="080" update_data="2024-05-21 21:09:42.458"
-		delete_data="2024-05-21 21:09:42.458" delete_flag="false" />
-	<account account_id="2" account_name="小林雄磨2"
-		post_code="3380014" address="埼玉県" telephone_number="080"
-		update_data="2024-05-21 21:09:42.458" delete_data="2024-05-21 21:09:42.458" delete_flag="false" />
+	<account 
+		account_id="1"
+		account_name="小林雄磨"
+		post_code="3380014"
+		address="埼玉県"
+		telephone_number="080"
+		mail_address="yuuma19946325@gmail.com"
+		password="19946325Yuuma"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="false" />
+	<account 
+		account_id="2"
+		account_name="小林雄磨2"
+		post_code="3380014"
+		address="埼玉県"
+		telephone_number="080"
+		mail_address="yuuma199463251@gmail.com"
+		password="19946325Yuuma1"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="false" />
 </dataset>

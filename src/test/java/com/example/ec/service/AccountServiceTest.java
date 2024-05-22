@@ -3,9 +3,11 @@ package com.example.ec.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.*;
 
 import java.io.InputStream;
 import java.sql.Connection;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
@@ -73,7 +75,9 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("アカウント作成")
 	public void createAccount01() {
-		final Account account = createAccount("小林5", "3380014", "埼玉県", "080");
+		Account account = new Account("小林雄磨", "3380014", "埼玉県", "080", "yuuma19946325@gmail.com",
+				"19946325Yuuma");
+		account.setUpdateDataNow();
 
 		accountRepository.save(account);
 		// アカウント作成
@@ -81,8 +85,8 @@ public class AccountServiceTest {
 			ITable actualTable = dbUnitConnection.createDataSet().getTable("account");
 
 			assertThat(actualTable.getRowCount()).isEqualTo(3); // Assuming initial dataset has 2 records
-			assertThat(actualTable.getValue(2, "account_name")).isEqualTo("小林5");
-			assertThat(actualTable.getValue(2, "post_code")).isEqualTo("3380018");
+			assertThat(actualTable.getValue(2, "account_name")).isEqualTo("小林雄磨");
+			assertThat(actualTable.getValue(2, "post_code")).isEqualTo("3380014");
 			assertThat(actualTable.getValue(2, "delete_data")).isNull();
 
 			System.out.println(actualTable);
@@ -97,11 +101,21 @@ public class AccountServiceTest {
 	@DisplayName("アカウント取得")
 	public void getAccount01() {
 
+		Account account = new Account();
+
+		// doReturn(accountDetails).when(accountRepository).findById((long) 1).get();
+		// when(accountRepository.findById((long) 1)).thenReturn(accounts);
+
+		when(accountRepository.findById((long) 1)).thenReturn(Optional.of(account));
+
 		try {
 			// アカウント取得処理
-			Account account = accountService.getAccount((long) 1);
+			account = accountService.getAccount((long) 1);
 
-			System.out.println(account);
+			// 結果の検証
+			assertThat(account).isNotNull();
+			assertThat(account.getAccountId()).isEqualTo(1);
+
 		} catch (Exception e) {
 			// 例外がスローされた場合は失敗
 			fail("例外がスローされました: " + e.getMessage());
@@ -111,7 +125,8 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("チェック結果が問題なし")
 	public void checkAccountData01() {
-		final Account account = createAccount("小林", "3380014", "埼玉県", "080");
+		Account account = new Account("小林雄磨", "3380014", "埼玉県", "080", "yuuma19946325@gmail.com",
+				"19946325Yuuma");
 
 		try {
 			// アカウント情報チェック処理
@@ -126,7 +141,8 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("アカウント名が未存在")
 	public void checkAccountData02() {
-		final Account account = createAccount(null, "3380014", "埼玉県", "080");
+		Account account = new Account(null, "3380014", "埼玉県", "080", "yuuma19946325@gmail.com",
+				"19946325Yuuma");
 
 		// アカウント情報チェック処理		
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -139,7 +155,8 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("郵便番号が未存在")
 	public void checkAccountData03() {
-		final Account account = createAccount("小林", null, "埼玉県", "080");
+		Account account = new Account("小林雄磨", null, "埼玉県", "080", "yuuma19946325@gmail.com",
+				"19946325Yuuma");
 
 		// アカウント情報チェック処理		
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -152,7 +169,8 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("住所が未存在")
 	public void checkAccountData04() {
-		final Account account = createAccount("小林", "3380014", null, "080");
+		Account account = new Account("小林雄磨", "3380014", null, "080", "yuuma19946325@gmail.com",
+				"19946325Yuuma");
 
 		// アカウント情報チェック処理		
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -165,8 +183,8 @@ public class AccountServiceTest {
 	@Test
 	@DisplayName("電話番号が未存在")
 	public void checkAccountData05() {
-		final Account account = createAccount("小林", "3380014", "埼玉県", null);
-
+		Account account = new Account("小林雄磨", "3380014", "埼玉県", null, "yuuma19946325@gmail.com",
+				"19946325Yuuma");
 		// アカウント情報チェック処理		
 		Exception exception = assertThrows(Exception.class, () -> {
 			accountService.checkAccountData(account);
@@ -176,28 +194,41 @@ public class AccountServiceTest {
 	}
 
 	@Test
-	@DisplayName("全てが未存在")
+	@DisplayName("Eメールアドレスが未存在")
 	public void checkAccountData06() {
-		final Account account = createAccount(null, null, null, null);
+		Account account = new Account("小林雄磨", "3380014", "埼玉県", "080", null,
+				"19946325Yuuma");
+		// アカウント情報チェック処理		
+		Exception exception = assertThrows(Exception.class, () -> {
+			accountService.checkAccountData(account);
+		});
+
+		assertTrue(exception.getMessage().contains("Eメールが未入力です"));
+	}
+
+	@Test
+	@DisplayName("パスワードが未存在")
+	public void checkAccountData07() {
+		Account account = new Account("小林雄磨", "3380014", "埼玉県", "080", "yuuma19946325@gmail.com",
+				null);
+		// アカウント情報チェック処理		
+		Exception exception = assertThrows(Exception.class, () -> {
+			accountService.checkAccountData(account);
+		});
+
+		assertTrue(exception.getMessage().contains("パスワードが未入力です"));
+	}
+
+	@Test
+	@DisplayName("全てが未存在")
+	public void checkAccountData08() {
+		Account account = new Account();
 
 		// アカウント情報チェック処理		
 		Exception exception = assertThrows(Exception.class, () -> {
 			accountService.checkAccountData(account);
 		});
 
-		assertTrue(exception.getMessage().contains("アカウント名,郵便番号,住所,電話番号が未入力です"));
-	}
-
-	public Account createAccount(String accountName, String postCode, String address, String telephoneNumber) {
-		Account account = new Account();
-
-		account.setAccountName(accountName);
-		account.setPostCode(postCode);
-		account.setAddress(address);
-		account.setTelephoneNumber(telephoneNumber);
-		account.setUpdateDataNow();
-
-		return account;
-
+		assertTrue(exception.getMessage().contains("アカウント名,郵便番号,住所,電話番号,Eメール,パスワードが未入力です"));
 	}
 }

@@ -36,6 +36,9 @@ public class AccountController {
 		// アカウント情報チェック処理
 		accountService.checkAccountData(accountDetails);
 
+		// アカウント存在チェック処理
+		accountService.checkExistsAccount(accountDetails.getMailAddress());
+
 		// アカウント作成処理
 		accountService.createAccount(accountDetails);
 

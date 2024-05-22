@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+	@ExceptionHandler(SQLException.class)
+	public ResponseEntity<ErrorResponse> handleBadRequestException(SQLException ex) {
+		ErrorResponse errorResponse = new ErrorResponse(
+				HttpStatus.INTERNAL_SERVER_ERROR.value(),
+				ex.getMessage());
+		return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 	@ExceptionHandler(BadRequestException.class)
 	public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException ex) {
 		ErrorResponse errorResponse = new ErrorResponse(

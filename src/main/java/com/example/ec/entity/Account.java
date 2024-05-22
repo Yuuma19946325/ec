@@ -20,6 +20,20 @@ import lombok.Data;
 @Table(name = "account")
 public class Account {
 
+	public Account() {
+	}
+
+	public Account(String accountName, String postCode, String address, String telephoneNumber, String mailAddress,
+			String password) {
+
+		this.accountName = accountName;
+		this.postCode = postCode;
+		this.address = address;
+		this.telephoneNumber = telephoneNumber;
+		this.mailAddress = mailAddress;
+		this.password = password;
+	}
+
 	// アカウントID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +55,14 @@ public class Account {
 	// 電話番号
 	@Column(name = "telephoneNumber")
 	private String telephoneNumber;
+
+	// Eメールアドレス
+	@Column(name = "mailAddress")
+	private String mailAddress;
+
+	// パスワード
+	@Column(name = "password")
+	private String password;
 
 	// 更新日時
 	@Column(name = "updateData")
@@ -125,6 +147,34 @@ public class Account {
 	}
 
 	/**
+	 * @return mailAddress
+	 */
+	public String getMailAddress() {
+		return mailAddress;
+	}
+
+	/**
+	 * @param mailAddress セットする mailAddress
+	 */
+	public void setMailAddress(String mailAddress) {
+		this.mailAddress = mailAddress;
+	}
+
+	/**
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password セットする password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
 	 * @return updateData
 	 */
 	public Date getUpdateData() {
@@ -166,13 +216,19 @@ public class Account {
 		this.deleteFlag = deleteFlag;
 	}
 
+	/**
+	 * 現在日時を更新日時に設定する
+	 */
 	public void setUpdateDataNow() {
-		if (Objects.nonNull(this.updateData))
+		if (Objects.nonNull(getUpdateData()))
 			return;
 		this.updateData = new Date();
 
 	}
 
+	/**
+	 * オブジェクトの内部情報をチェックする
+	 */
 	public String checkAccountData() {
 
 		ArrayList<String> accountErrorMessage = new ArrayList<String>();
@@ -188,6 +244,12 @@ public class Account {
 
 		if (StringUtils.isEmpty(this.telephoneNumber))
 			accountErrorMessage.add("電話番号");
+
+		if (StringUtils.isEmpty(this.mailAddress))
+			accountErrorMessage.add("Eメール");
+
+		if (StringUtils.isEmpty(this.password))
+			accountErrorMessage.add("パスワード");
 
 		if (!CollectionUtils.isEmpty(accountErrorMessage))
 			return String.join(",", accountErrorMessage) + "が未入力です";
