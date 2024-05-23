@@ -25,5 +25,5 @@ public interface CategoryService {
 	public void checkCategoryData(Category categoryDetails) throws Exception;
 
 	// カテゴリ存在チェック処理
-	public void checkExistsCategory(Long categoryId, String categoryName) throws Exception;
+	public void checkExistsCategory(Long categoryId, Category categoryDetails) throws Exception;
 }

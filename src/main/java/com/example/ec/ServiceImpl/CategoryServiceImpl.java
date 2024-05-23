@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ情報リスト取得
 			categoryList = categoryRepository.findByCategoryList();
 		} catch (Exception e) {
-			throw new SQLException("アカウントの取得に失敗しました");
+			throw new SQLException("カテゴリの取得に失敗しました");
 		}
 
 		return categoryList;
@@ -100,7 +100,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ更新
 			categoryRepository.save(category);
 		} catch (Exception e) {
-			throw new SQLException("カテゴリの削除に失敗しました");
+			throw new SQLException("カテゴリの停止に失敗しました");
 		}
 	}
 
@@ -126,7 +126,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @throws Exception エラーレスポンス
 	 */
 	@Override
-	public void checkExistsCategory(Long categoryId, String categoryName) throws Exception {
+	public void checkExistsCategory(Long categoryId, Category categoryDetails) throws Exception {
 		int categoryNameCount = 0;
 
 		try {
@@ -135,12 +135,13 @@ public class CategoryServiceImpl implements CategoryService {
 				// カテゴリIDがnullの場合(カテゴリが新規作成の場合)
 
 				// DB→カテゴリ情報取得
-				categoryNameCount = categoryRepository.findByCategoryName(categoryName);
+				categoryNameCount = categoryRepository.findByCategoryName(categoryDetails.getCategoryName());
 			} else {
 				// カテゴリIDがnull以外の場合(カテゴリが更新の場合)
 
 				// DB→カテゴリ情報取得
-				categoryNameCount = categoryRepository.findByCategoryIdAndCategoryName(categoryId, categoryName);
+				categoryNameCount = categoryRepository.findByCategoryIdAndCategoryName(categoryId,
+						categoryDetails.getCategoryName());
 			}
 		} catch (Exception e) {
 

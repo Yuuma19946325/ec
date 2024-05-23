@@ -24,6 +24,12 @@ public class Category {
 		this.categoryName = categoryName;
 	}
 
+	public Category(String categoryName, boolean deleteFlag) {
+
+		this.categoryName = categoryName;
+		this.deleteFlag = deleteFlag;
+	}
+
 	// カテゴリID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -40,7 +40,7 @@ public class CategoryController {
 		categoryService.checkCategoryData(categoryDetails);
 
 		// カテゴリ存在チェック処理
-		categoryService.checkExistsCategory(null, categoryDetails.getCategoryName());
+		categoryService.checkExistsCategory(null, categoryDetails);
 
 		// カテゴリ作成処理
 		categoryService.createCategory(categoryDetails);
@@ -78,7 +78,7 @@ public class CategoryController {
 
 		// カテゴリ存在チェック処理
 		if (!categoryDetails.isDeleteFlag())
-			categoryService.checkExistsCategory(categoryId, categoryDetails.getCategoryName());
+			categoryService.checkExistsCategory(categoryId, categoryDetails);
 
 		// カテゴリ更新処理
 		categoryService.updateCategory(categoryId, categoryDetails);
