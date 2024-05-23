@@ -15,6 +15,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.AfterEach;
@@ -57,7 +58,9 @@ public class CategoryServiceTest {
 		Connection connection = dataSource.getConnection();
 		dbUnitConnection = new DatabaseConnection(connection);
 		try (InputStream is = getClass().getClassLoader().getResourceAsStream("Category.xml")) {
-			IDataSet dataSet = new FlatXmlDataSetBuilder().build(is);
+			IDataSet originalDataSet = new FlatXmlDataSetBuilder().build(is);
+			ReplacementDataSet dataSet = new ReplacementDataSet(originalDataSet);
+			dataSet.addReplacementObject("", null);
 			DatabaseOperation.CLEAN_INSERT.execute(dbUnitConnection, dataSet);
 		}
 	}
@@ -123,14 +126,14 @@ public class CategoryServiceTest {
 		assertThat(categoryList.get(0).getCategoryId()).isEqualTo(1);
 		assertThat(categoryList.get(0).getCategoryName()).isEqualTo("ネックレス");
 		assertThat(categoryList.get(0).getUpdateData()).isNotNull();
-		assertThat(categoryList.get(0).getDeleteData()).isNotNull();
+		assertThat(categoryList.get(0).getDeleteData()).isNull();
 		assertThat(categoryList.get(0).isDeleteFlag()).isEqualTo(false);
 
 		// Assert
 		assertThat(categoryList.get(1).getCategoryId()).isEqualTo(2);
 		assertThat(categoryList.get(1).getCategoryName()).isEqualTo("ピアス");
 		assertThat(categoryList.get(1).getUpdateData()).isNotNull();
-		assertThat(categoryList.get(1).getDeleteData()).isNotNull();
+		assertThat(categoryList.get(1).getDeleteData()).isNull();
 		assertThat(categoryList.get(1).isDeleteFlag()).isEqualTo(false);
 	}
 

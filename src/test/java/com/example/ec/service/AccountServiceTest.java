@@ -14,6 +14,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ITable;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.jupiter.api.AfterEach;
@@ -56,7 +57,9 @@ public class AccountServiceTest {
 		Connection connection = dataSource.getConnection();
 		dbUnitConnection = new DatabaseConnection(connection);
 		try (InputStream is = getClass().getClassLoader().getResourceAsStream("Account.xml")) {
-			IDataSet dataSet = new FlatXmlDataSetBuilder().build(is);
+			IDataSet originalDataSet = new FlatXmlDataSetBuilder().build(is);
+			ReplacementDataSet dataSet = new ReplacementDataSet(originalDataSet);
+			dataSet.addReplacementObject("", null);
 			DatabaseOperation.CLEAN_INSERT.execute(dbUnitConnection, dataSet);
 		}
 	}
@@ -137,7 +140,7 @@ public class AccountServiceTest {
 		assertThat(account.getMailAddress()).isEqualTo("yuuma199463252@gmail.com");
 		assertThat(account.getPassword()).isEqualTo("19946325Yuuma");
 		assertThat(account.getUpdateData()).isNotNull();
-		assertThat(account.getDeleteData()).isNotNull();
+		assertThat(account.getDeleteData()).isNull();
 		assertThat(account.isDeleteFlag()).isEqualTo(false);
 	}
 
@@ -209,7 +212,7 @@ public class AccountServiceTest {
 		assertThat(actualTable.getValue(0, "mail_address")).isEqualTo("yuuma@gmail.com");
 		assertThat(actualTable.getValue(0, "password")).isEqualTo("19946325");
 		assertThat(actualTable.getValue(0, "update_data")).isNotNull();
-		assertThat(actualTable.getValue(0, "delete_data")).isNotNull();
+		assertThat(actualTable.getValue(0, "delete_data")).isNull();
 		assertThat(actualTable.getValue(0, "delete_flag")).isEqualTo(false);
 	}
 

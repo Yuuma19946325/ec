@@ -9,7 +9,7 @@
 		mail_address="yuuma199463252@gmail.com"
 		password="19946325Yuuma"
 		update_data="2024-05-21 21:09:42.458"
-		delete_data="2024-05-21 21:09:42.458"
+		delete_data=""
 		delete_flag="false" />
 	<account 
 		account_id="2"
@@ -20,6 +20,6 @@
 		mail_address="yuuma199463251@gmail.com"
 		password="19946325Yuuma1"
 		update_data="2024-05-21 21:09:42.458"
-		delete_data="2024-05-21 21:09:42.458"
+		delete_data=""
 		delete_flag="false" />
 </dataset>

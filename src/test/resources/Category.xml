@@ -4,13 +4,13 @@
 		category_id="1"
 		category_name="ネックレス"
 		update_data="2024-05-21 21:09:42.458"
-		delete_data="2024-05-21 21:09:42.458"
+		delete_data=""
 		delete_flag="false" />
 	<category 
 		category_id="2"
 		category_name="ピアス"
 		update_data="2024-05-21 21:09:42.458"
-		delete_data="2024-05-21 21:09:42.458"
+		delete_data=""
 		delete_flag="false" />
 	<category 
 		category_id="3"
