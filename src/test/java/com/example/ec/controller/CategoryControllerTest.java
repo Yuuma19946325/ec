@@ -23,6 +23,9 @@ import com.example.ec.Handler.SQLException;
 import com.example.ec.entity.Category;
 import com.example.ec.service.CategoryService;
 
+/**
+ * Category APIのコントローラーテスト
+ */
 @WebMvcTest(CategoryController.class)
 public class CategoryControllerTest extends CommonTest {
 

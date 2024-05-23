@@ -21,6 +21,9 @@ import com.example.ec.Handler.SQLException;
 import com.example.ec.entity.Account;
 import com.example.ec.service.AccountService;
 
+/**
+ * Account APIのコントローラーテスト
+ */
 @WebMvcTest(AccountController.class)
 public class AccountControllerTest extends CommonTest {
 

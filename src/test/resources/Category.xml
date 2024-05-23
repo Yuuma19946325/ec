@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<category 
+		category_id="1"
+		category_name="ネックレス"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="false" />
+	<category 
+		category_id="2"
+		category_name="ピアス"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="false" />
+	<category 
+		category_id="3"
+		category_name="2連ピアス"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="true" />
+</dataset>
