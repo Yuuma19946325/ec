@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ作成
 			categoryRepository.save(categoryDetails);
 		} catch (Exception e) {
-			throw new SQLException("カテゴリの作成に失敗しました");
+			throw new SQLException("カテゴリの作成に失敗しました", e);
 		}
 	}
 
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ情報リスト取得
 			categoryList = categoryRepository.findByCategoryList();
 		} catch (Exception e) {
-			throw new SQLException("カテゴリの取得に失敗しました");
+			throw new SQLException("カテゴリの取得に失敗しました", e);
 		}
 
 		return categoryList;
@@ -80,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ更新
 			categoryRepository.save(category);
 		} catch (Exception e) {
-			throw new SQLException("カテゴリの更新に失敗しました");
+			throw new SQLException("カテゴリの更新に失敗しました", e);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class CategoryServiceImpl implements CategoryService {
 			// DB→カテゴリ更新
 			categoryRepository.save(category);
 		} catch (Exception e) {
-			throw new SQLException("カテゴリの停止に失敗しました");
+			throw new SQLException("カテゴリの停止に失敗しました", e);
 		}
 	}
 
@@ -145,7 +145,7 @@ public class CategoryServiceImpl implements CategoryService {
 			}
 		} catch (Exception e) {
 
-			throw new SQLException("カテゴリの取得に失敗しました");
+			throw new SQLException("カテゴリの取得に失敗しました", e);
 		}
 
 		if (categoryNameCount > 0)

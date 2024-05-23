@@ -7,4 +7,9 @@ public class SQLException extends RuntimeException {
 	public SQLException(String message) {
 		super(message);
 	}
+
+	public SQLException(String message, Exception e) {
+		super(message);
+		System.err.println(e);
+	}
 }

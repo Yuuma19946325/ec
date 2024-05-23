@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
 			// DB→アカウント作成
 			accountRepository.save(accountDetails);
 		} catch (Exception e) {
-			throw new SQLException("アカウントの作成に失敗しました");
+			throw new SQLException("アカウントの作成に失敗しました", e);
 		}
 
 	}
@@ -55,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
 			// DB→アカウント情報取得
 			account = accountRepository.findByMailAddressAndPassword(mailAddress, password);
 		} catch (Exception e) {
-			throw new SQLException("アカウントの取得に失敗しました");
+			throw new SQLException("アカウントの取得に失敗しました", e);
 		}
 
 		if (Objects.isNull(account))
@@ -89,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
 			// DB→アカウント更新
 			accountRepository.save(account);
 		} catch (Exception e) {
-			throw new SQLException("アカウントの更新に失敗しました");
+			throw new SQLException("アカウントの更新に失敗しました", e);
 		}
 
 	}
@@ -124,7 +124,7 @@ public class AccountServiceImpl implements AccountService {
 			mailAddressCount = accountRepository.findByMailAddress(mailAddress);
 		} catch (Exception e) {
 
-			throw new SQLException("アカウントの取得に失敗しました");
+			throw new SQLException("アカウントの取得に失敗しました", e);
 		}
 
 		if (mailAddressCount > 0)
