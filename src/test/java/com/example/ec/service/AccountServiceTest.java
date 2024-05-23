@@ -122,8 +122,11 @@ public class AccountServiceTest {
 	@DisplayName("アカウント取得_正常終了")
 	public void getAccount_OK() throws Exception {
 
+		String mailAddress = "yuuma199463252@gmail.com";
+		String password = "19946325Yuuma";
+
 		// テスト実行
-		Account account = accountService.getAccount((long) 1);
+		Account account = accountService.getAccount(mailAddress, password);
 
 		// Assert
 		assertThat(account.getAccountId()).isEqualTo(1);
@@ -139,15 +142,48 @@ public class AccountServiceTest {
 	}
 
 	@Test
+	@DisplayName("アカウント取得_メールアドレス未存在異常終了")
+	public void getAccount_NG1() throws Exception {
+
+		String mailAddress = "";
+		String password = "19946325Yuuma";
+
+		// テスト実行
+		Exception exception = assertThrows(Exception.class, () -> {
+			accountService.getAccount(mailAddress, password);
+		});
+
+		assertThat(exception.getMessage()).contains("アカウントが未存在でした");
+	}
+
+	@Test
+	@DisplayName("アカウント取得_パスワード未存在異常終了")
+	public void getAccount_NG2() throws Exception {
+
+		String mailAddress = "yuuma199463252@gmail.com";
+		String password = "";
+
+		// テスト実行
+		Exception exception = assertThrows(Exception.class, () -> {
+			accountService.getAccount(mailAddress, password);
+		});
+
+		assertThat(exception.getMessage()).contains("アカウントが未存在でした");
+	}
+
+	@Test
 	@DisplayName("アカウント取得_異常終了")
-	public void getAccount_NG() throws Exception {
+	public void getAccount_NG3() throws Exception {
+
+		String mailAddress = "yuuma199463252@gmail.com";
+		String password = "19946325Yuuma";
 
 		// リポジトリをnullに設定
 		ReflectionTestUtils.setField(accountService, "accountRepository", null);
 
 		// テスト実行
 		Exception exception = assertThrows(Exception.class, () -> {
-			accountService.getAccount((long) 1);
+			accountService.getAccount(mailAddress, password);
 		});
 
 		assertThat(exception.getMessage()).contains("アカウントの取得に失敗しました");

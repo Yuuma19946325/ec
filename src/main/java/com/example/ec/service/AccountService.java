@@ -11,7 +11,7 @@ public interface AccountService {
 	public void createAccount(Account accountDetails) throws Exception;
 
 	// アカウント情報取得処理
-	public Account getAccount(Long accountId) throws Exception;
+	public Account getAccount(String mailAddress, String password) throws Exception;
 
 	// アカウント更新処理
 	public void updateAccount(Long accountId, Account accountDetails) throws Exception;

@@ -1,9 +1,12 @@
 package com.example.ec.ServiceImpl;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ec.Handler.BadRequestException;
+import com.example.ec.Handler.ResourceNotFoundException;
 import com.example.ec.Handler.SQLException;
 import com.example.ec.entity.Account;
 import com.example.ec.repository.AccountRepository;
@@ -43,23 +46,26 @@ public class AccountServiceImpl implements AccountService {
 	 * @throws Exception エラーレスポンス
 	 */
 	@Override
-	public Account getAccount(Long accountId) throws Exception {
+	public Account getAccount(String mailAddress, String password) throws Exception {
 
 		// アカウント情報インスタンスを作成
 		Account account = new Account();
 
 		try {
 			// DB→アカウント情報取得
-			account = accountRepository.findById(accountId).get();
+			account = accountRepository.findByMailAddressAndPassword(mailAddress, password);
 		} catch (Exception e) {
 			throw new SQLException("アカウントの取得に失敗しました");
 		}
+
+		if (Objects.isNull(account))
+			throw new ResourceNotFoundException("アカウントが未存在でした");
 
 		return account;
 	}
 
 	/**
-	 * アカウント情報更新
+	 * アカウント更新
 	 * @param accountId アカウントID
 	 * @param accountDetails アカウント情報
 	 * @throws Exception エラーレスポンス
@@ -69,8 +75,8 @@ public class AccountServiceImpl implements AccountService {
 
 		try {
 			// アカウント取得
-			Account account = getAccount(accountId);
-			
+			Account account = accountRepository.findById(accountId).get();
+
 			// アカウント情報を設定
 			account.setAccountName(accountDetails.getAccountName());
 			account.setPostCode(accountDetails.getPostCode());
@@ -96,11 +102,11 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void checkAccountData(Account accountDetails) throws Exception {
 		// アカウント情報チェック処理
-		String accountErrorMessage = accountDetails.checkAccountData();
+		String errorMessage = accountDetails.checkAccountData();
 		// エラーメッセージが存在する場合
-		if (StringUtils.isNotEmpty(accountErrorMessage))
+		if (StringUtils.isNotEmpty(errorMessage))
 			// 処理を異常終了で終了
-			throw new BadRequestException(accountErrorMessage);
+			throw new BadRequestException(errorMessage);
 	}
 
 	/**

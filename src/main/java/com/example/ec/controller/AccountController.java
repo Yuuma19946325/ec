@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ec.Handler.ErrorResponse;
@@ -18,7 +19,7 @@ import com.example.ec.service.AccountService;
  * アカウントコントローラー
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/account")
 public class AccountController {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class AccountController {
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
-	@PostMapping("/account")
+	@PostMapping("")
 	public ErrorResponse createAccount(@RequestBody Account accountDetails) throws Exception {
 
 		// アカウント情報チェック処理
@@ -54,21 +55,22 @@ public class AccountController {
 	 * @return アカウント情報
 	 * @throws Exception エラーレスポンス
 	 */
-	@GetMapping("/account/{accountId}")
-	public Account getAccount(@PathVariable(value = "accountId") Long accountId) throws Exception {
+	@GetMapping("")
+	public Account getAccount(@RequestParam(value = "mailAddress") String mailAddress,
+			@RequestParam(value = "password") String password) throws Exception {
 
 		// アカウント情報取得処理
-		return accountService.getAccount(accountId);
+		return accountService.getAccount(mailAddress, password);
 	}
 
 	/**
-	 * アカウント情報更新
+	 * アカウント更新
 	 * @param accountId アカウントID
 	 * @param accountDetails アカウント情報
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
-	@PutMapping("/account/{accountId}")
+	@PutMapping("/{accountId}")
 	public ErrorResponse updataAccount(@PathVariable(value = "accountId") Long accountId,
 			@RequestBody Account accountDetails) throws Exception {
 
@@ -80,7 +82,7 @@ public class AccountController {
 
 		// 完了レスポンスを返却
 		return new ErrorResponse(
-				HttpStatus.CREATED.value(),
+				HttpStatus.OK.value(),
 				null);
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.example.ec.CommonTest;
 import com.example.ec.Handler.BadRequestException;
 import com.example.ec.Handler.ErrorResponse;
+import com.example.ec.Handler.ResourceNotFoundException;
 import com.example.ec.Handler.SQLException;
 import com.example.ec.entity.Account;
 import com.example.ec.service.AccountService;
@@ -156,38 +157,61 @@ public class AccountControllerTest extends CommonTest {
 	@DisplayName("アカウント読込API_OK")
 	public void getAccount_OK() throws Exception {
 
-		Long accountId = (long) 1;
+		String mailAddress = "yuuma19946325@gmail.com";
+		String password = "19946325Yuuma";
 
 		final Account accountDetails = new Account("小林", "3380014", "埼玉県", "080", "yuuma19946325@gmail.com",
 				"19946325Yuuma");
 
 		// モックの設定
-		doReturn(accountDetails).when(accountService).getAccount(accountId);
+		doReturn(accountDetails).when(accountService).getAccount(mailAddress, password);
 
 		// テスト実行
-		mvc.perform(MockMvcRequestBuilders.get("/api/account/" + accountId)
+		mvc.perform(MockMvcRequestBuilders.get("/api/account?mailAddress=" + mailAddress + "&password=" + password)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().json(asJsonString(accountDetails)));
 	}
 
 	@Test
-	@DisplayName("アカウント読込API_NG")
-	public void getAccount_NG() throws Exception {
+	@DisplayName("アカウント読込API_取得失敗NG")
+	public void getAccount_NG1() throws Exception {
 
-		Long accountId = (long) 2;
+		String mailAddress = "";
+		String password = "19946325Yuuma";
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.INTERNAL_SERVER_ERROR.value(),
 				"アカウントの取得に失敗しました");
 
 		// モックの設定
-		doThrow(new SQLException("アカウントの取得に失敗しました")).when(accountService).getAccount(accountId);
+		doThrow(new SQLException("アカウントの取得に失敗しました")).when(accountService).getAccount(mailAddress, password);
 
 		// テスト実行
-		mvc.perform(MockMvcRequestBuilders.get("/api/account/" + accountId)
+		mvc.perform(MockMvcRequestBuilders.get("/api/account?mailAddress=" + mailAddress + "&password=" + password)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isInternalServerError())
+				.andExpect(content().json(asJsonString(errorResponse)));
+	}
+
+	@Test
+	@DisplayName("アカウント読込API_未存在NG")
+	public void getAccount_NG2() throws Exception {
+
+		String mailAddress = "";
+		String password = "";
+
+		ErrorResponse errorResponse = new ErrorResponse(
+				HttpStatus.NOT_FOUND.value(),
+				"アカウントが未存在でした");
+
+		// モックの設定
+		doThrow(new ResourceNotFoundException("アカウントが未存在でした")).when(accountService).getAccount(mailAddress, password);
+
+		// テスト実行
+		mvc.perform(MockMvcRequestBuilders.get("/api/account?mailAddress=" + mailAddress + "&password=" + password)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound())
 				.andExpect(content().json(asJsonString(errorResponse)));
 	}
 
@@ -200,7 +224,7 @@ public class AccountControllerTest extends CommonTest {
 				"19946325Yuuma");
 
 		ErrorResponse errorResponse = new ErrorResponse(
-				HttpStatus.CREATED.value(),
+				HttpStatus.OK.value(),
 				null);
 
 		// モックの設定
