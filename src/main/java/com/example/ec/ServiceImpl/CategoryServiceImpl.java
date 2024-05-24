@@ -62,6 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * カテゴリ更新
 	 * @param categoryId カテゴリID
 	 * @param categoryDetails カテゴリ情報
+	 * @throws Exception エラーレスポンス
 	 */
 	@Override
 	public void updateCategory(Long categoryId, Category categoryDetails) throws Exception {
@@ -87,6 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
 	/**
 	 * カテゴリ削除
 	 * @param categoryId カテゴリID
+	 * @throws Exception エラーレスポンス
 	 */
 	@Override
 	public void deleteCategory(Long categoryId) throws Exception {
