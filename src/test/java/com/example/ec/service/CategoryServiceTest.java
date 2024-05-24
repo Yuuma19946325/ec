@@ -135,6 +135,13 @@ public class CategoryServiceTest {
 		assertThat(categoryList.get(1).getUpdateData()).isNotNull();
 		assertThat(categoryList.get(1).getDeleteData()).isNull();
 		assertThat(categoryList.get(1).isDeleteFlag()).isEqualTo(false);
+
+		// Assert
+		assertThat(categoryList.get(2).getCategoryId()).isEqualTo(3);
+		assertThat(categoryList.get(2).getCategoryName()).isEqualTo("2連ピアス");
+		assertThat(categoryList.get(2).getUpdateData()).isNotNull();
+		assertThat(categoryList.get(2).getDeleteData()).isNotNull();
+		assertThat(categoryList.get(2).isDeleteFlag()).isEqualTo(true);
 	}
 
 	@Test

@@ -12,7 +12,7 @@ import com.example.ec.entity.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-	@Query(value = "select * from category where delete_flag = false ORDER BY category_id", nativeQuery = true) // SQL
+	@Query(value = "select * from category ORDER BY category_id", nativeQuery = true) // SQL
 	List<Category> findByCategoryList();
 
 	@Query(value = "select count(*) from category where category_name = :category_name", nativeQuery = true) // SQL
