@@ -147,7 +147,6 @@ public class CategoryServiceTest {
 	@Test
 	@DisplayName("カテゴリリスト取得_異常終了")
 	public void getCategoryList_NG1() throws Exception {
-		Category category = new Category("テストピアス");
 
 		// リポジトリをnullに設定
 		ReflectionTestUtils.setField(categoryService, "categoryRepository", null);
