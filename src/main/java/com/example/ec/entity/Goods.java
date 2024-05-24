@@ -19,6 +19,24 @@ import lombok.Data;
 @Table(name = "goods")
 public class Goods {
 
+	public Goods() {
+	}
+
+	public Goods(String goodsName, int categoryId, int amount, int stock, int set, String material, String brand,
+			String theme, int target, int point) {
+
+		this.goodsName = goodsName;
+		this.categoryId = categoryId;
+		this.amount = amount;
+		this.stock = stock;
+		this.set = set;
+		this.material = material;
+		this.brand = brand;
+		this.theme = theme;
+		this.target = target;
+		this.point = point;
+	}
+
 	// 商品ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

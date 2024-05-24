@@ -215,7 +215,7 @@ public class CategoryControllerTest extends CommonTest {
 	}
 
 	@Test
-	@DisplayName("カテゴリリスト更新API_削除フラグなし_OK")
+	@DisplayName("カテゴリ更新API_削除フラグなし_OK")
 	public void updataCategory_OK1() throws Exception {
 
 		final Long categoryId = (long) 1;
@@ -241,7 +241,7 @@ public class CategoryControllerTest extends CommonTest {
 	}
 
 	@Test
-	@DisplayName("カテゴリリスト更新API_削除フラグあり_OK")
+	@DisplayName("カテゴリ更新API_削除フラグあり_OK")
 	public void updataCategory_OK2() throws Exception {
 
 		final Long categoryId = (long) 1;
@@ -266,7 +266,7 @@ public class CategoryControllerTest extends CommonTest {
 	}
 
 	@Test
-	@DisplayName("カテゴリリスト更新API_入力情報NG")
+	@DisplayName("カテゴリ更新API_入力情報NG")
 	public void updataCategory_NG1() throws Exception {
 
 		final Long categoryId = (long) 1;
@@ -291,7 +291,7 @@ public class CategoryControllerTest extends CommonTest {
 	}
 
 	@Test
-	@DisplayName("カテゴリリスト更新API_存在チェック取得NG")
+	@DisplayName("カテゴリ更新API_存在チェック取得NG")
 	public void updataCategory_NG2() throws Exception {
 
 		final Long categoryId = (long) 1;
@@ -318,7 +318,7 @@ public class CategoryControllerTest extends CommonTest {
 	}
 
 	@Test
-	@DisplayName("カテゴリリスト更新API_存在チェックNG")
+	@DisplayName("カテゴリ更新API_存在チェックNG")
 	public void updataCategory_NG3() throws Exception {
 
 		final Long categoryId = (long) 1;
