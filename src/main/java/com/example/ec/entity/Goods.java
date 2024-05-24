@@ -2,7 +2,6 @@ package com.example.ec.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 import org.springframework.util.CollectionUtils;
 
@@ -66,30 +65,6 @@ public class Goods {
 	@Column(name = "point")
 	private int point;
 
-	// 商品画像URL1
-	@Column(name = "goodsImage1")
-	private byte goodsImage1;
-
-	// 商品画像URL2
-	@Column(name = "goodsImage2")
-	private byte goodsImage2;
-
-	// 商品画像URL3
-	@Column(name = "goodsImage3")
-	private byte goodsImage3;
-
-	// 商品画像URL4
-	@Column(name = "goodsImage4")
-	private byte goodsImage4;
-
-	// 商品画像URL5
-	@Column(name = "goodsImage5")
-	private byte goodsImage5;
-
-	// 商品画像URL6
-	@Column(name = "goodsImage6")
-	private byte goodsImage6;
-
 	// 更新日時
 	@Column(name = "updateData")
 	private Date updateData;
@@ -128,14 +103,14 @@ public class Goods {
 		if (StringUtils.isEmpty(this.goodsName))
 			errorMessage.add("商品名");
 
+		if (0 == this.categoryId)
+			errorMessage.add("カテゴリ");
+
 		if (0 == this.amount)
 			errorMessage.add("金額");
 
 		if (0 == this.stock)
 			errorMessage.add("在庫");
-
-		if (Objects.isNull(this.goodsImage1))
-			errorMessage.add("画像1");
 
 		if (!CollectionUtils.isEmpty(errorMessage))
 			return String.join(",", errorMessage) + "が未入力です";

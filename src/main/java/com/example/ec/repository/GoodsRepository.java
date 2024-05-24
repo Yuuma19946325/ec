@@ -11,6 +11,6 @@ import com.example.ec.entity.Goods;
 @Repository
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
 
-	@Query(value = "select * from goods ORDER BY goods_id", nativeQuery = true) // SQL
+	@Query(value = "select * from goods WHERE delete_flag = false ORDER BY goods_id", nativeQuery = true) // SQL
 	List<Goods> findByGoodsList();
 }

@@ -81,12 +81,6 @@ public class GoodsServiceImpl implements GoodsService {
 			goods.setTheme(goodsDetails.getTheme());
 			goods.setTarget(goodsDetails.getTarget());
 			goods.setPoint(goodsDetails.getPoint());
-			goods.setGoodsImage1(goodsDetails.getGoodsImage1());
-			goods.setGoodsImage2(goodsDetails.getGoodsImage2());
-			goods.setGoodsImage3(goodsDetails.getGoodsImage3());
-			goods.setGoodsImage4(goodsDetails.getGoodsImage4());
-			goods.setGoodsImage5(goodsDetails.getGoodsImage5());
-			goods.setGoodsImage6(goodsDetails.getGoodsImage6());
 			goods.setUpdateDataNow();
 
 			// DB→商品更新
