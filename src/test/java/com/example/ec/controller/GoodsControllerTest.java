@@ -40,7 +40,7 @@ public class GoodsControllerTest extends CommonTest {
 	public void createGoods_OK() throws Exception {
 
 		final Goods goodsDetails = new Goods("商品名", 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.CREATED.value(),
@@ -65,7 +65,7 @@ public class GoodsControllerTest extends CommonTest {
 	public void createGoods_NG1() throws Exception {
 
 		final Goods goodsDetails = new Goods(null, 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.BAD_REQUEST.value(),
@@ -89,7 +89,7 @@ public class GoodsControllerTest extends CommonTest {
 	public void createGoods_NG2() throws Exception {
 
 		final Goods goodsDetails = new Goods(null, 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -131,9 +131,9 @@ public class GoodsControllerTest extends CommonTest {
 
 		List<Goods> goodsList = new ArrayList<Goods>();
 		goodsList.add(new Goods("テスト商品", 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200));
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]));
 		goodsList.add(new Goods("テスト商品2", 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200));
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]));
 
 		// モックの設定
 		doReturn(goodsList).when(goodsService).getGoodsList();
@@ -172,7 +172,7 @@ public class GoodsControllerTest extends CommonTest {
 		final Long goodsId = (long) 1;
 
 		final Goods goodsDetails = new Goods("テスト商品", 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.OK.value(),
@@ -198,7 +198,7 @@ public class GoodsControllerTest extends CommonTest {
 		final Long goodsId = (long) 1;
 
 		final Goods goodsDetails = new Goods(null, 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.BAD_REQUEST.value(),
@@ -223,7 +223,7 @@ public class GoodsControllerTest extends CommonTest {
 		final Long goodsId = (long) 1;
 
 		final Goods goodsDetails = new Goods("テスト商品", 1, 1000, 10, 2,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		ErrorResponse errorResponse = new ErrorResponse(
 				HttpStatus.INTERNAL_SERVER_ERROR.value(),

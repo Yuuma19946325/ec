@@ -23,7 +23,7 @@ public class Goods {
 	}
 
 	public Goods(String goodsName, int categoryId, int amount, int stock, int set, String material, String brand,
-			String theme, int target, int point) {
+			String theme, int target, int point, byte[] image) {
 
 		this.goodsName = goodsName;
 		this.categoryId = categoryId;
@@ -35,6 +35,7 @@ public class Goods {
 		this.theme = theme;
 		this.target = target;
 		this.point = point;
+		this.image = image;
 	}
 
 	// 商品ID
@@ -83,6 +84,10 @@ public class Goods {
 	@Column(name = "point")
 	private int point;
 
+	// 画像
+	@Column(name = "image")
+	private byte[] image;
+
 	// 更新日時
 	@Column(name = "updateData")
 	private Date updateData;
@@ -129,6 +134,9 @@ public class Goods {
 
 		if (0 == this.stock)
 			errorMessage.add("在庫");
+
+		if (null == this.image || this.image.length == 0)
+			errorMessage.add("画像");
 
 		if (!CollectionUtils.isEmpty(errorMessage))
 			return String.join(",", errorMessage) + "が未入力です";

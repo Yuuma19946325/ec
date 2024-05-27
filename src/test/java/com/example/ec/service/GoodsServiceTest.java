@@ -85,7 +85,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品作成_正常終了")
 	public void createGoods_OK() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品", 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行
 		goodsService.createGoods(goodsDetails);
@@ -104,6 +104,7 @@ public class GoodsServiceTest {
 		assertThat(actualTable.getValue(3, "theme")).isEqualTo("ブラックラビット");
 		assertThat(actualTable.getValue(3, "target")).isEqualTo(18);
 		assertThat(actualTable.getValue(3, "point")).isEqualTo(200);
+		assertThat(actualTable.getValue(3, "image")).isNotNull();
 		assertThat(actualTable.getValue(3, "update_data")).isNotNull();
 		assertThat(actualTable.getValue(3, "delete_data")).isNull();
 		assertThat(actualTable.getValue(3, "delete_flag")).isEqualTo(false);
@@ -113,7 +114,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品作成_異常終了")
 	public void createGoods_NG() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品", 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// リポジトリをnullに設定
 		ReflectionTestUtils.setField(goodsService, "goodsRepository", null);
@@ -145,6 +146,7 @@ public class GoodsServiceTest {
 		assertThat(goodsList.get(0).getTheme()).isEqualTo("テストテーマ1");
 		assertThat(goodsList.get(0).getTarget()).isEqualTo(1);
 		assertThat(goodsList.get(0).getPoint()).isEqualTo(100);
+		assertThat(goodsList.get(0).getImage()).isNotNull();
 		assertThat(goodsList.get(0).getUpdateData()).isNotNull();
 		assertThat(goodsList.get(0).getDeleteData()).isNull();
 		assertThat(goodsList.get(0).isDeleteFlag()).isEqualTo(false);
@@ -161,6 +163,7 @@ public class GoodsServiceTest {
 		assertThat(goodsList.get(1).getTheme()).isEqualTo("テストテーマ2");
 		assertThat(goodsList.get(1).getTarget()).isEqualTo(2);
 		assertThat(goodsList.get(1).getPoint()).isEqualTo(200);
+		assertThat(goodsList.get(1).getImage()).isNotNull();
 		assertThat(goodsList.get(1).getUpdateData()).isNotNull();
 		assertThat(goodsList.get(1).getDeleteData()).isNull();
 		assertThat(goodsList.get(1).isDeleteFlag()).isEqualTo(false);
@@ -187,7 +190,7 @@ public class GoodsServiceTest {
 		final Long goodsId = (long) 2;
 
 		final Goods goodsDetails = new Goods("テスト商品5", 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行
 		goodsService.updateGoods(goodsId, goodsDetails);
@@ -206,6 +209,7 @@ public class GoodsServiceTest {
 		assertThat(actualTable.getValue(1, "theme")).isEqualTo("ブラックラビット");
 		assertThat(actualTable.getValue(1, "target")).isEqualTo(18);
 		assertThat(actualTable.getValue(1, "point")).isEqualTo(200);
+		assertThat(actualTable.getValue(1, "image")).isNotNull();
 		assertThat(actualTable.getValue(1, "update_data")).isNotNull();
 		assertThat(actualTable.getValue(1, "delete_data")).isNull();
 		assertThat(actualTable.getValue(1, "delete_flag")).isEqualTo(false);
@@ -217,7 +221,7 @@ public class GoodsServiceTest {
 		final Long goodsId = (long) 2;
 
 		final Goods goodsDetails = new Goods("テスト商品5", 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// リポジトリをnullに設定
 		ReflectionTestUtils.setField(goodsService, "goodsRepository", null);
@@ -277,7 +281,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品情報チェック処理_チェック結果が問題なし")
 	public void checkGoodsData_OK() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品5", 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行
 		goodsService.checkGoodsData(goodsDetails);
@@ -287,7 +291,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品情報チェック処理_商品名が未存在")
 	public void checkGoodsData_NG1() throws Exception {
 		final Goods goodsDetails = new Goods(null, 5, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行	
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -302,7 +306,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品情報チェック処理_カテゴリが未存在")
 	public void checkGoodsData_NG2() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品5", 0, 5000, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行	
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -317,7 +321,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品情報チェック処理_金額が未存在")
 	public void checkGoodsData_NG3() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品5", 5, 0, 50, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行	
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -332,7 +336,7 @@ public class GoodsServiceTest {
 	@DisplayName("商品情報チェック処理_在庫が未存在")
 	public void checkGoodsData_NG4() throws Exception {
 		final Goods goodsDetails = new Goods("テスト商品5", 5, 5000, 0, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, new byte[1]);
 
 		// テスト実行	
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -344,10 +348,10 @@ public class GoodsServiceTest {
 	}
 
 	@Test
-	@DisplayName("商品情報チェック処理_全てが未存在")
+	@DisplayName("商品情報チェック処理_画像が未存在")
 	public void checkGoodsData_NG5() throws Exception {
-		final Goods goodsDetails = new Goods(null, 0, 0, 0, 5,
-				"ステンレス", "レフレム", "ブラックラビット", 18, 200);
+		final Goods goodsDetails = new Goods("テスト商品5", 5, 5000, 0, 5,
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, null);
 
 		// テスト実行	
 		Exception exception = assertThrows(Exception.class, () -> {
@@ -355,6 +359,21 @@ public class GoodsServiceTest {
 		});
 
 		// Assert
-		assertThat(exception.getMessage()).contains("商品名,カテゴリ,金額,在庫が未入力です");
+		assertThat(exception.getMessage()).contains("画像が未入力です");
+	}
+
+	@Test
+	@DisplayName("商品情報チェック処理_全てが未存在")
+	public void checkGoodsData_NG6() throws Exception {
+		final Goods goodsDetails = new Goods(null, 0, 0, 0, 5,
+				"ステンレス", "レフレム", "ブラックラビット", 18, 200, null);
+
+		// テスト実行	
+		Exception exception = assertThrows(Exception.class, () -> {
+			goodsService.checkGoodsData(goodsDetails);
+		});
+
+		// Assert
+		assertThat(exception.getMessage()).contains("商品名,カテゴリ,金額,在庫,画像が未入力です");
 	}
 }
