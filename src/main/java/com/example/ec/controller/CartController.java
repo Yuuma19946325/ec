@@ -11,36 +11,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ec.Handler.ErrorResponse;
-import com.example.ec.entity.Goods;
-import com.example.ec.service.GoodsService;
+import com.example.ec.entity.Cart;
+import com.example.ec.service.CartService;
 
 /**
- * 商品コントローラー
+ * カートコントローラー
  */
 @RestController
-@RequestMapping("/api/goods")
-public class GoodsController {
+@RequestMapping("/api/cart")
+public class CartController {
 
 	@Autowired
-	GoodsService goodsService;
+	CartService cartService;
 
 	/**
-	 * 商品作成
-	 * @param goodsDetails 商品情報
+	 * カート作成
+	 * @param cartDetails カート情報
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
 	@PostMapping("")
-	public ErrorResponse createGoods(@RequestBody Goods goodsDetails) throws Exception {
+	public ErrorResponse createCart(@RequestBody Cart cartDetails) throws Exception {
 
-		// 商品情報チェック処理
-		goodsService.checkGoodsData(goodsDetails);
+		// カート情報チェック処理
+		cartService.checkCartData(cartDetails);
 
-		// 商品作成処理
-		goodsService.createGoods(goodsDetails);
+		// カート作成処理
+		cartService.createCart(cartDetails);
 
 		// 完了レスポンスを返却
 		return new ErrorResponse(
@@ -49,31 +50,31 @@ public class GoodsController {
 	}
 
 	/**
-	 * 商品リスト取得
-	 * @return 商品リスト情報
-	 * @throws Exception エラーレスポンス
-	 */
-	@GetMapping("/list")
-	public List<Goods> getGoodsList() throws Exception {
-
-		// 商品リストを返却
-		return goodsService.getGoodsList();
-	}
-
-	/**
-	 * 商品更新
+	 * カートリスト取得
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
-	@PutMapping("/{goodsId}")
-	public ErrorResponse updataGoods(@PathVariable(value = "goodsId") Long goodsId,
-			@RequestBody Goods goodsDetails) throws Exception {
+	@GetMapping("/list")
+	public List<Cart> getCartList(@RequestParam(value = "accountId") Long accountId) throws Exception {
 
-		// 商品情報チェック処理
-		goodsService.checkGoodsData(goodsDetails);
+		// カートリストを返却
+		return cartService.getCartList(accountId);
+	}
 
-		// 商品更新処理
-		goodsService.updateGoods(goodsId, goodsDetails);
+	/**
+	 * カート更新
+	 * @return 完了レスポンス
+	 * @throws Exception エラーレスポンス
+	 */
+	@PutMapping("/{cartId}")
+	public ErrorResponse updataCart(@PathVariable(value = "cartId") Long cartId,
+			@RequestBody Cart cartDetails) throws Exception {
+
+		// カート情報チェック処理
+		cartService.checkCartData(cartDetails);
+
+		// カート更新処理
+		cartService.updateCart(cartId, cartDetails);
 
 		// 完了レスポンスを返却
 		return new ErrorResponse(
@@ -82,15 +83,15 @@ public class GoodsController {
 	}
 
 	/**
-	 * 商品削除
+	 * カート削除
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
-	@DeleteMapping("/{goodsId}")
-	public ErrorResponse deleteGoods(@PathVariable(value = "goodsId") Long goodsId) throws Exception {
+	@DeleteMapping("/{cartId}")
+	public ErrorResponse deleteCart(@PathVariable(value = "cartId") Long cartId) throws Exception {
 
-		// 商品削除処理
-		goodsService.deleteGoods(goodsId);
+		// カート削除処理
+		cartService.deleteCart(cartId);
 
 		// 完了レスポンスを返却
 		return new ErrorResponse(
