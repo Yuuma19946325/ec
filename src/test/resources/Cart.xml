@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<cart 
+		cart_id="1"
+		account_id="80"
+		goods_id="1"
+		quantity="10"
+		total_amount="10000" />
+	<cart 
+		cart_id="2"
+		account_id="80"
+		goods_id="2"
+		quantity="20"
+		total_amount="20000" />
+	<goods 
+		goods_id="1"
+		goods_name="テスト商品1"
+		category_id="1"
+		amount="1000"
+		stock="10"
+		set="1"
+		material="テスト材質1"
+		brand="テストブランド1"
+		theme="テストテーマ1"
+		target="1"
+		point="100"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods 
+		goods_id="2"
+		goods_name="テスト商品2"
+		category_id="2"
+		amount="2000"
+		stock="20"
+		set="2"
+		material="テスト材質2"
+		brand="テストブランド2"
+		theme="テストテーマ2"
+		target="2"
+		point="200"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods 
+		goods_id="3"
+		goods_name="テスト商品3"
+		category_id="3"
+		amount="3000"
+		stock="30"
+		set="3"
+		material="テスト材質3"
+		brand="テストブランド3"
+		theme="テストテーマ3"
+		target="3"
+		point="300"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data="2024-05-21 21:09:42.458"
+		delete_flag="true" />
+</dataset>
