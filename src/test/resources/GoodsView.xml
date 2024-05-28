@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<goods_view 
+		goods_view_id="1"
+		account_id="1"
+		goods_id="1"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_view 
+		goods_view_id="2"
+		account_id="1"
+		goods_id="2"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_view 
+		goods_view_id="3"
+		account_id="2"
+		goods_id="2"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_view 
+		goods_view_id="4"
+		account_id="3"
+		goods_id="3"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+</dataset>
