@@ -12,6 +12,6 @@ import com.example.ec.entity.Cart;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-	@Query(value = "select * from public.cart WHERE account_id = :account_id", nativeQuery = true) // SQL
+	@Query(value = "select * from cart WHERE account_id = :account_id", nativeQuery = true) // SQL
 	List<Cart> findByCartList(@Param("account_id") Long accountId);
 }

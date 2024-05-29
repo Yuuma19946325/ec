@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<goods_purchase 
+		goods_purchase_id="1"
+		account_id="1"
+		goods_id="1"
+		purchas_number="4"
+		update_data="2024-05-21 21:09:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_purchase 
+		goods_purchase_id="2"
+		account_id="1"
+		goods_id="2"
+		purchas_number="3"
+		update_data="2024-05-21 21:10:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_purchase 
+		goods_purchase_id="3"
+		account_id="2"
+		goods_id="2"
+		purchas_number="2"
+		update_data="2024-05-21 21:11:42.458"
+		delete_data=""
+		delete_flag="false" />
+</dataset>
