@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<order_state 
+		order_state="0"
+		order_state_name="注文中" />
+	<order_state 
+		order_state="1"
+		order_state_name="振込済み" />
+	<order_state 
+		order_state="2"
+		order_state_name="発注済み" />
+	<order_state 
+		order_state="9"
+		order_state_name="注文キャンセル(お店事情)" />
+</dataset>
