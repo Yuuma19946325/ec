@@ -24,6 +24,16 @@ public class OrderInformation {
 	public OrderInformation() {
 	}
 
+	public OrderInformation(long accountId, String postCode, String address, int totalAmount, int orderState,
+			List<OrderDetails> orderDetails) {
+		this.accountId = accountId;
+		this.postCode = postCode;
+		this.address = address;
+		this.totalAmount = totalAmount;
+		this.orderState = orderState;
+		this.orderDetails = orderDetails;
+	}
+
 	// 注文ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

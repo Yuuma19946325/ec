@@ -21,6 +21,13 @@ public class OrderDetails {
 	public OrderDetails() {
 	}
 
+	public OrderDetails(long orderId, long goodsId, int quantity, int quantityAmount) {
+		this.orderId = orderId;
+		this.goodsId = goodsId;
+		this.quantity = quantity;
+		this.quantityAmount = quantityAmount;
+	}
+
 	// 注文詳細ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

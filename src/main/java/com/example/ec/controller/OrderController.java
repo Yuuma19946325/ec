@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,8 +74,8 @@ public class OrderController {
 	 * @return 完了レスポンス
 	 * @throws Exception エラーレスポンス
 	 */
-	@PutMapping("")
-	public ErrorResponse updataCart(@RequestParam(value = "orderId") Long orderId,
+	@PutMapping("/{orderId}")
+	public ErrorResponse updataOrder(@PathVariable(value = "orderId") Long orderId,
 			@RequestParam(value = "orderState") int orderState) throws Exception {
 
 		// 注文更新処理
