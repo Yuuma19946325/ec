@@ -69,7 +69,7 @@ public class OrderDetails {
 		ArrayList<String> errorMessage = new ArrayList<String>();
 
 		if (0 == this.goodsId)
-			errorMessage.add("商品ID");
+			errorMessage.add("商品");
 
 		if (0 == this.quantity)
 			errorMessage.add("数量");

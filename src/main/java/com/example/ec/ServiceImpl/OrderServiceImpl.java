@@ -115,10 +115,10 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws Exception エラーレスポンス
 	 */
 	@Override
-	public void updateOrder(Long orderHistoryId, int orderState) throws Exception {
+	public void updateOrder(Long orderId, int orderState) throws Exception {
 		try {
 			// 注文情報取得
-			OrderInformation order = orderRepository.findById(orderHistoryId).get();
+			OrderInformation order = orderRepository.findById(orderId).get();
 
 			// 注文情報を設定
 			order.setOrderState(orderState);

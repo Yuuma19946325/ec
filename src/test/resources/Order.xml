@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<order_information 
+		order_id="1"
+		account_id="2" 
+		post_code="3380015" 
+		address="東京都" 
+		total_amount="31000" 
+		order_state="0"
+		update_data="2024-05-21 21:09:42.458" />
+	<order_details 
+		order_details_id="1"
+		order_id="1"
+		goods_id="1" 
+		quantity="2" 
+		quantity_amount="20000" 
+		update_data="2024-05-21 21:09:42.458" />
+	<order_details 
+		order_details_id="2"
+		order_id="1"
+		goods_id="2" 
+		quantity="1" 
+		quantity_amount="11000" 
+		update_data="2024-05-21 21:09:42.458" />
+	<goods_purchase 
+		goods_purchase_id="1"
+		account_id="2"
+		goods_id="1"
+		purchas_number="2"
+		update_data="2024-05-21 21:11:42.458"
+		delete_data=""
+		delete_flag="false" />
+	<goods_purchase 
+		goods_purchase_id="2"
+		account_id="2"
+		goods_id="2"
+		purchas_number="1"
+		update_data="2024-05-21 21:11:42.458"
+		delete_data=""
+		delete_flag="false" />
+</dataset>
